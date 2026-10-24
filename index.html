@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10101c">
+<meta name="description" content="خيال AI - منصة عربية لإنشاء الفيديوهات والقصص الكرتونية بالذكاء الاصطناعي.">
+<title>خيال AI | اصنع فيديوك بخيالك</title>
+
+<style>
+:root {
+  --bg: #10101c;
+  --panel: #191929;
+  --border: #303047;
+  --purple: #8b5cf6;
+  --blue: #536dfe;
+  --text: #f8f7ff;
+  --muted: #aaa9c3;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+button, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 6%;
+  border-bottom: 1px solid var(--border);
+  background: #10101ceF;
+}
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#c4a7ff,#65d9ff);
+  color: transparent;
+  background-clip: text;
+}
+.logo span { font-size: 13px; }
+nav { display: flex; gap: 20px; color: var(--muted); font-size: 14px; }
+nav a:hover { color: white; }
+.header-btn, .primary {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(110deg,var(--purple),var(--blue));
+}
+.hero {
+  text-align: center;
+  padding: 60px 18px 30px;
+  background: radial-gradient(ellipse at 50% 0%,#4b31833d,transparent 65%);
+}
+.badge {
+  display: inline-block;
+  color: #d5c4ff;
+  background: #8b5cf622;
+  border: 1px solid #8b5cf655;
+  border-radius: 30px;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+h1 {
+  font-size: clamp(30px,5vw,52px);
+  line-height: 1.5;
+  margin: 18px auto 12px;
+}
+.gradient {
+  background: linear-gradient(90deg,#c4a7ff,#65d9ff);
+  color: transparent;
+  background-clip: text;
+}
+.hero p { color: var(--muted); line-height: 2; max-width: 620px; margin: auto; }
+main { max-width: 1050px; margin: auto; padding: 15px 20px 60px; }
+.creator {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 22px;
+  margin: 25px auto 45px;
+  box-shadow: 0 20px 70px #0003;
+}
+.tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.tab {
+  background: #222237;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 11px 16px;
+  border-radius: 11px;
+}
+.tab.active { background: #7650db33; border-color: var(--purple); color: white; }
+label { display: block; font-size: 14px; margin-bottom: 10px; }
+textarea {
+  width: 100%;
+  min-height: 125px;
+  resize: vertical;
+  background: #11111e;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 15px;
+  line-height: 1.9;
+  outline: none;
+}
+textarea:focus, select:focus { border-color: var(--purple); }
+.settings {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #11111e;
+  color: white;
+}
+.generate {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(110deg,var(--purple),var(--blue));
+}
+.generate:hover, .header-btn:hover { opacity: .9; }
+#notice {
+  display: none;
+  margin-top: 15px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #8b5cf61a;
+  color: #ded1ff;
+  line-height: 1.9;
+}
+.section-title { margin: 35px 0 20px; font-size: 24px; }
+.tools {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 17px;
+}
+.tool {
+  padding: 23px;
+  border-radius: 17px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg,#1b1b30,#151522);
+  transition: .2s;
+  cursor: pointer;
+}
+.tool:hover { transform: translateY(-4px); border-color: var(--purple); }
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49px;
+  height: 49px;
+  border-radius: 14px;
+  background: #8b5cf622;
+  font-size: 25px;
+  margin-bottom: 17px;
+}
+.tool h3 { margin: 0 0 10px; font-size: 17px; }
+.tool p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.story {
+  margin-top: 35px;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid #7855b955;
+  background: linear-gradient(120deg,#4e287b33,#293c7b33);
+}
+.story h2 { margin-top: 0; }
+.story p { color: var(--muted); line-height: 2; }
+.story button { margin-top: 10px; }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 15px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2;
+}
+@media(max-width:700px) {
+  header { padding: 14px 4%; }
+  nav { display: none; }
+  .header-btn { padding: 10px; font-size: 12px; }
+  .hero { padding-top: 40px; }
+  .creator { padding: 15px; }
+  .settings { grid-template-columns: 1fr; }
+  .tools { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .tool { padding: 15px; }
+  .tool h3 { font-size: 15px; }
+  .section-title { font-size: 21px; }
+}
+@media(max-width:360px) {
+  .tools { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#">خيال <span>AI ✦</span></a>
+  <nav>
+    <a href="#create">إنشاء فيديو</a>
+    <a href="#tools">الأدوات</a>
+    <a href="#stories">قصص الأطفال</a>
+  </nav>
+  <a class="header-btn" href="#create">ابدأ الآن ✨</a>
+</header>
+
+<section class="hero">
+  <span class="badge">✦ عالم جديد من الإبداع بالذكاء الاصطناعي</span>
+  <h1>حوّل خيالك إلى<br><span class="gradient">فيديو مذهل</span></h1>
+  <p>
+    اكتب فكرتك، تخيل عالمك، ودع الذكاء الاصطناعي يساعدك
+    على تحويل أفكارك إلى مشاهد بصرية وقصص إبداعية.
+  </p>
+</section>
+
+<main>
+  <section class="creator" id="create">
+    <div class="tabs">
+      <button class="tab active" data-mode="text">🎬 نص إلى فيديو</button>
+      <button class="tab" data-mode="image">🖼️ صورة إلى فيديو</button>
+      <button class="tab" data-mode="story">🧚 قصة كرتونية</button>
+    </div>
+
+    <label for="prompt">صف الفيديو الذي تريد إنشاءه</label>
+    <textarea id="prompt" placeholder="مثال: جنية صغيرة تطير في غابة سحرية مليئة بالأزهار المضيئة، بأسلوب كرتوني ثلاثي الأبعاد..."></textarea>
+
+    <div class="settings">
+      <div>
+        <label for="style">نمط الفيديو</label>
+        <select id="style">
+          <option>كرتوني ثلاثي الأبعاد</option>
+          <option>خيالي وسحري</option>
+          <option>واقعي سينمائي</option>
+          <option>أنمي</option>
+          <option>رسوم فنية</option>
+        </select>
+      </div>
+      <div>
+        <label for="ratio">أبعاد الفيديو</label>
+        <select id="ratio">
+          <option value="9:16">عمودي 9:16</option>
+          <option value="16:9">أفقي 16:9</option>
+          <option value="1:1">مربع 1:1</option>
+        </select>
+      </div>
+      <div>
+        <label for="duration">المدة المطلوبة</label>
+        <select id="duration">
+          <option value="5">5 ثوانٍ</option>
+          <option value="10">10 ثوانٍ</option>
+          <option value="30">30 ثانية - قد يحتاج إلى عدة مقاطع</option>
+          <option value="60">60 ثانية - قد يحتاج إلى عدة مقاطع</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="generate" id="generate">✦ إنشاء الفيديو</button>
+    <div id="notice" role="status"></div>
+  </section>
+
+  <h2 class="section-title" id="tools">اكتشف أدوات خيال AI ✨</h2>
+
+  <section class="tools">
+    <article class="tool" data-mode="text">
+      <div class="icon">🎬</div>
+      <h3>نص إلى فيديو</h3>
+      <p>حوّل وصفك المكتوب إلى فكرة فيديو إبداعية.</p>
+    </article>
+
+    <article class="tool" data-mode="image">
+      <div class="icon">🖼️</div>
+      <h3>تحريك الصور</h3>
+      <p>جهّز صورتك لاستخدامها في إنشاء فيديو متحرك.</p>
+    </article>
+
+    <article class="tool" data-mode="fantasy">
+      <div class="icon">🪄</div>
+      <h3>عالم الخيال</h3>
+      <p>ابتكر مشاهد سحرية وعوالم خيالية.</p>
+    </article>
+
+    <article class="tool" data-mode="story">
+      <div class="icon">🧸</div>
+      <h3>قصص الأطفال</h3>
+      <p>حوّل أفكار القصص إلى مشاهد كرتونية.</p>
+    </article>
+
+    <article class="tool" data-mode="character">
+      <div class="icon">🎭</div>
+      <h3>الشخصيات</h3>
+      <p>خطط لشخصياتك الكرتونية وأبطال قصصك.</p>
+    </article>
+
+    <article class="tool" data-mode="social">
+      <div class="icon">📱</div>
+      <h3>فيديوهات التواصل</h3>
+      <p>جهّز أفكار فيديوهات مناسبة للمحتوى العمودي.</p>
+    </article>
+  </section>
+
+  <section class="story" id="stories">
+    <h2>🧚 استوديو القصص الكرتونية</h2>
+    <p>
+      اصنع عالمًا من المغامرات، من الجنيات الصغيرة إلى الأبواب السحرية.
+      اكتب فكرتك وسنجهزها لتكون نقطة البداية لمشروعك.
+    </p>
+    <button class="primary" id="storyBtn">ابدأ قصتك ✨</button>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">خيال AI ✦</div>
+  <p>من خيالك إلى فيديو.</p>
+  <span>© 2026 خيال AI — جميع الحقوق محفوظة.</span>
+</footer>
+
+<script>
+const promptBox = document.getElementById('prompt');
+const notice = document.getElementById('notice');
+let currentMode = 'text';
+
+const examples = {
+  text: 'اكتب وصف الفيديو الذي تتخيله بالتفصيل...',
+  image: 'صف الصورة التي تريد تحريكها والحركة المطلوبة...',
+  story: 'اكتب قصة أطفال تريد تحويلها إلى مشاهد كرتونية...',
+  fantasy: 'صف عالمك الخيالي والمشاهد السحرية التي تتخيلها...',
+  character: 'صف الشخصية الكرتونية ومظهرها وحركاتها...',
+  social: 'اكتب فكرة فيديو قصير تريد نشره على وسائل التواصل...'
+};
+
+function chooseMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.mode === mode);
+  });
+  promptBox.placeholder = examples[mode] || examples.text;
+  notice.style.display = 'none';
+  document.getElementById('create').scrollIntoView({behavior:'smooth'});
+}
+
+document.querySelectorAll('[data-mode]').forEach(el => {
+  el.addEventListener('click', () => chooseMode(el.dataset.mode));
+});
+
+document.getElementById('storyBtn').addEventListener('click', () => {
+  chooseMode('story');
+  promptBox.value = 'قصة الجنية الصغيرة والباب السحري داخل غابة مضيئة، بأسلوب كرتوني ثلاثي الأبعاد مناسب للأطفال.';
+});
+
+document.getElementById('generate').addEventListener('click', () => {
+  const prompt = promptBox.value.trim();
+
+  notice.style.display = 'block';
+
+  if (!prompt) {
+    notice.textContent = 'يرجى كتابة وصف الفيديو أولاً، ثم اضغط على إنشاء الفيديو.';
+    promptBox.focus();
+    return;
+  }
+
+  notice.textContent =
+    'تم تجهيز وصف مشروعك بنجاح! هذه نسخة أولية من واجهة خيال AI. ' +
+    'توليد الفيديو الحقيقي غير مفعّل بعد؛ سنضيفه بعد ربط الموقع بخدمة توليد فيديو بالذكاء الاصطناعي. ' +
+    'لم يتم إنشاء فيديو أو استهلاك رصيد.';
+});
+</script>
+
+</body>
+</html>
